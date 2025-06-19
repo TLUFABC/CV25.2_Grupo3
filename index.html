@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyPage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="left-column">
+      <div class="avatar"></div>
+      <div class="social-links">
+        <a href="https://github.com/LeonardoMaioli" target="_blank">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" class="icon">
+        </a>
+        <a href="https://www.linkedin.com/in/leonardo-severgnine-maioli-8042702aa/" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" class="icon">
+        </a>
+      </div>
+      <div class="about">
+        <p>Olá, meu nome é Leonardo! Sou estudante de Ciência da Computação na UFABC e essa é a minha página pessoal desenvolvida para a disciplina Visão Computacional. No espaço ao lado, você pode explorar os botões para conhecer um pouco mais sobre a minha vida. As informações de cada tópico irão aparecer no quadro ao final da tela. Seja muito bem-vindo(a)!</p>
+      </div>
+      <div class="audio-player">
+      <p>🎙Entenda o funcionamento dessa página:</p>
+        <audio controls>
+          <source src="audios/audio-exemplo.ogg" type="audio/mpeg">
+          Seu navegador não suporta áudio HTML5.
+        </audio>
+      </div>
+    </div>
+
+    <div class="right-column">
+      <div class="photo-button" style="background-image: url('images/musicas.png');" onclick="loadContent('musicas')">
+      </div>
+      <div class="photo-button" style="background-image: url('images/viagens.png');" onclick="loadContent('viagens')">
+      </div>
+      <div class="photo-button" style="background-image: url('images/esportes.png');" onclick="loadContent('esportes')">
+      </div>
+      <div class="photo-button" style="background-image: url('images/filmes.png');" onclick="loadContent('filmes')">
+      </div>
+      <div class="photo-button" style="background-image: url('images/estudos.png');" onclick="loadContent('estudos')">
+      </div>
+      <div class="photo-button" style="background-image: url('images/trabalho.png');" onclick="loadContent('trabalho')">
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="dynamic-content">
+    <p>Selecione uma das opções acima para carregar o conteúdo correspondente.</p>
+  </div>
+
+  <script>
+    function loadContent(section) {
+      const content = document.getElementById('dynamic-content');
+      if (section === 'musicas') {
+        content.innerHTML = `
+          <div class="musicas-section">
+            <h2 class="musicas-title">Músicas</h2>
+            <p class="musicas-desc">
+              Gosto de diferentes estilos de músicas. Aqui eu listei algumas que eu vivo escutando:
+            </p>
+            <div class="playlist-grid">
+              <div class="music-item">
+                <img src="images/stockholm.jpg" alt="Stockholm">
+                <a href="https://www.youtube.com/watch?v=9WZN3S_j9dQ" target="_blank">
+                  <strong>Somewhere In Stockholm</strong><br>
+                  Avicii
+                </a>
+              </div>
+              <div class="music-item">
+                <img src="images/eob.jpg" alt="End of Beginning">
+                <a href="https://www.youtube.com/watch?v=EoVQ_TQFJy0" target="_blank">
+                  <strong>End of Beginning</strong><br>
+                  Djo
+                </a>
+              </div>
+              <div class="music-item">
+                <img src="images/mbsky.jpg" alt="Mr. Blue Sky">
+                <a href="https://www.youtube.com/watch?v=ktvTqknDobU" target="_blank">
+                  <strong>Mr. Blue Sky</strong><br>
+                  ELO
+                </a>
+              </div>
+              <div class="music-item">
+                <img src="images/smile.jpg" alt="Smile">
+                <a href="https://www.youtube.com/watch?v=MQ9K6EbQUxE" target="_blank">
+                  <strong>Smile</strong><br>
+                  Martin Garrix
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (section === 'viagens') {
+        content.innerHTML = `
+          <div class="viagens-section">
+            <h2 class="viagens-title">Viagens</h2>
+            <p class="viagens-desc">
+              Durante a graduação, tive a oportunidade de realizar um intercâmbio na Alemanha durante 6 meses. 
+              Nesse período eu pude conhecer muitos países e lugares. Deixo aqui algumas das cidades que mais gostei de conhecer.
+            </p>
+            <div class="viagens-grid">
+              <div class="viagem-item">
+                <img src="images/berna.png" alt="Berna - Suiça">
+                <p>Berna - Suiça</p>
+              </div>
+              <div class="viagem-item">
+                <img src="images/paris.jpg" alt="Paris - França">
+                <p>Paris - França</p>
+              </div>
+              <div class="viagem-item">
+                <img src="images/estocolmo.png" alt="Estocolmo - Suécia">
+                <p>Estocolmo - Suécia</p>
+              </div>
+              <div class="viagem-item">
+                <img src="images/ljubiliana.png" alt="Ljubiliana - Eslovênia">
+                <p>Ljubiliana - Eslovênia</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (section === 'esportes') {
+        content.innerHTML = `
+          <div class="esportes-section">
+            <h2 class="esportes-title">Esportes</h2>
+            <p class="esportes-desc">
+              Sempre gostei de praticar esportes, mas o meu favorito é o futebol. Sou vascaíno e trago aqui alguns dos jogos mais marcantes que me recordo.
+            </p>
+            <div class="esportes-grid">
+              <div class="jogo-item">
+                <img src="images/vasco-coritiba.jpg" alt="Vasco x Coritiba">
+                <p>Vasco x Coritiba - 2011</p>
+              </div>
+              <div class="jogo-item">
+                <img src="images/vasco-flu.jpg" alt="Vasco x Fluminense">
+                <p>Vasco x Fluminense - 2012</p>
+              </div>
+              <div class="jogo-item">
+                <img src="images/vasco-universitario.jpg" alt="Vasco x Universitario">
+                <p>Vasco x Universitário - 2011</p>
+              </div>
+              <div class="jogo-item">
+                <img src="images/vasco-ituano.png" alt="Vasco x Ituano">
+                <p>Vasco x Ituano - 2022</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (section === 'filmes') {
+        content.innerHTML = `
+          <div class="filmes-section">
+            <h2 class="filmes-title">Filmes e Séries</h2>
+            <p class="filmes-desc">
+              Gosto muito de assistir séries e filmes. Listo aqui duas séries e dois filmes que gosto muito.
+            </p>
+            <div class="filmes-grid">
+              <div class="filme-item">
+                <img src="images/twd.jpg" alt="The Walking Dead">
+                <p>The Walking Dead</p>
+              </div>
+              <div class="filme-item">
+                <img src="images/texpanse.jpg" alt="The Expanse">
+                <p>The Expanse</p>
+              </div>
+              <div class="filme-item">
+                <img src="images/interestelar.jpg" alt="Interestelar">
+                <p>Interestelar</p>
+              </div>
+              <div class="filme-item">
+                <img src="images/achegada.png" alt="A Chegada">
+                <p>A Chegada</p>
+              </div>
+            </div>
+          </div>
+        `;
+      } else if (section === 'estudos') {
+        content.innerHTML = `
+          <div class="estudos-section">
+            <h2 class="estudos-title">Estudos</h2>
+            <p class="estudos-desc">
+              Nessa aba, vou listar algumas das matérias que mais gostei de cursar na graduação de Ciência da Computação até o momento.
+            </p>
+            <div class="estudos-grid">
+              <div class="estudo-item">
+                <img src="images/pln.jpg" alt="Processamento de Linguagem Natural">
+                <p>Processamento de Linguagem Natural</p>
+              </div>
+              <div class="estudo-item">
+                <img src="images/ml.jpg" alt="Aprendizado de Máquina">
+                <p>Aprendizado de Máquina</p>
+              </div>
+              <div class="estudo-item">
+                <img src="images/cec.png" alt="Computação Evolutiva e Conexionista">
+                <p>Computação Evolutiva e Conexionista</p>
+              </div>
+              <div class="estudo-item">
+                <img src="images/db.png" alt="Modelagem de Banco de Dados">
+                <p>Modelagem de Banco de Dados</p>
+              </div>
+            </div>
+          </div>
+        `;
+
+      } else if (section === 'trabalho') {
+        content.innerHTML = `
+          <div class="trabalho-section">
+            <h2 class="trabalho-title">Trabalho e Atividades</h2>
+            <p class="trabalho-desc">
+              Ao longo da minha graduação, pude atuar como monitor de duas disciplinas. Também participo da equipe Sirius e atualmente estou estagiando na CTG Brasil. Falo um pouco sobre essas atividades aqui.
+            </p>
+            <div class="trabalho-grid">
+              <div class="trabalho-item">
+                <img src="images/monitoria_cr.jpg" alt="Monitoria - Comunicação e Redes">
+                <p>Monitoria - Comunicação e Redes</p>
+              </div>
+              <div class="trabalho-item">
+                <img src="images/monitoria_ipe.png" alt="Monitoria - Prob. e Estatística">
+                <p>Monitoria - Prob. e Estatística</p>
+              </div>
+              <div class="trabalho-item">
+                <img src="images/sirius.png" alt="Equipe Sirius UFABC">
+                <p>Equipe Sirius UFABC</p>
+              </div>
+              <div class="trabalho-item">
+                <img src="images/estagio_ctg.jpg" alt="Estágio - CTG Brasil">
+                <p>Estágio - CTG Brasil</p>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+      content.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
