@@ -109,3 +109,7 @@ body {
   border-radius: 8px;
   margin-bottom: 20px;
 }
+
+.profile-image{
+  width: 200px;
+}
