@@ -1,0 +1,57 @@
+<div class="relatorio-container">
+  <h2>Relatório 1</h2>
+
+  <div class="button-group">
+    <button onclick="toggleSection('parte1')">Parte 1</button>
+    <button onclick="toggleSection('parte2')">Parte 2</button>
+  </div>
+
+  <div id="parte1" class="relatorio-section" style="display: none;">
+    <h3>(A)Por que a janela aberta não mostra a imagem colorida?</h3>
+    <p>A janela aberta mostra a imagem em tons cinza pois a chamada da função imread(), que é a função que carrega uma imagem de um caminho específico para um programa, apresentava  o parâmetro 0 após o nome do arquivo a ser carregado. 
+[ img = cv.imread('messi5.jpg',0) ]. Caso quisessem imprimir a imagem colorida poderíamos enviar apenas o nome da imagem, ou mudar o segundo parâmetro de 0 para 1.</p>
+<h3>(B)Qual a explicação de alteração de velocidade de exibição, e apresente suas soluções detalhadamente.</h3>
+<p>Nossa solução para alterar a velocidade de exibição foi alterar o valor do time.sleep(). Aumentando o valor divisor, temos um valor final menor, e portanto menor espera entre frames. Isto gera um vídeo exibindo mais rapidamente. Da mesma forma, podemos diminuir o valor do divisor, aumentando o valor de espera entre frames e assim causando um vídeo mais lento.
+
+Exemplo de valor alterado para um vídeo muito mais rápido:</p>
+<code>time.sleep(1/1000.0)</code>
+
+
+<h3>(C)Altere: modifique o programa para que uma imagem da câmera seja salva num arquivo “foto1.png” no momento em que for clicada a tecla ‘x’ no teclado. Apresente o resultado e sua solução detalhadamente.</h3>
+	<p>Inicialmente tentamos inserir uma outra linha com if cv.waitKey(1), verificando se o valor era igual a x, e então realizando um imwrite
+         passando o nome desejado e o frame previamente definido. Esta solução era capaz de salvar a imagem conforme desejado, mas notamos que 
+         algumas vezes nosso click parecia não ser registrado e só algumas vezes a imagem era salva. Percebemos que isto acontecia porque como 
+         tínhamos dois waitKeys, o programa estava alternando entre os dois e verificando apenas uma das teclas de cada vez. Para resolver este
+          problema, definimos uma variável como o valor da waitKey, fora dos ifs, e então realizamos a verificação do valor da tecla recebida 
+          pela variável. Por fim, definimos um img_counter e utilizamos ele para iterar o nome da foto, para podermos salvar várias fotos em 
+          seguida sem uma sobrescrever a outra por terem o mesmo nome.</p>
+
+	<pre><code>
+    img_counter = 0
+    cvVal = cv.waitKey(1)
+    if cvVal == ord('q'):
+        break
+    elif cvVal == ord('x'):
+        img_name = "foto{}.png".format(img_counter)
+        cv.imwrite(img_name, frame)
+        img_counter += 1
+</code></pre>
+
+
+
+<h3>(D)Altere: modifique o programa para que as imagens gravadas estejam “normais” no arquivo de vídeo salvo, e apresentem uma velocidade de exibição adequada. Apresente o resultado e sua solução detalhadamente</h3>
+
+No arquivo de vídeo salvo, a imagem apresenta dois problemas: imagem invertida e velocidade reduzida.
+
+O problema da imagem invertida se dá pelo fato de usarem a função cv.flip() para realizarem a inversão do frame do vídeo, antes de rodar a função write() no objeto do VideoWriter criado. [ frame = cv.flip(frame, 0) ]
+
+Já o problema da velocidade reduzida se dá pelo fato do FPS do VideoWriter estar setado com um valor baixo de 10 fps, e foi resolvido aumentando esse valor para 30.
+
+</p>
+  </div>
+
+  <div id="parte2" class="relatorio-section" style="display: none;">
+    <h3>Parte 2</h3>
+    <p>Texto da Parte 2 do relatório.</p>
+  </div>
+</div>
