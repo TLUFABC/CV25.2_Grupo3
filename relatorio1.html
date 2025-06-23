@@ -1,9 +1,25 @@
 <div class="relatorio-container">
-  <h2>Relatório 1</h2>
+  <h2>Relatório 1 - Captura de Imagem e Vídeo</h2>
+  <h3><pre>
+  Leonardo Severgnine Maioli - RA: 11201920579
+  Ricardo Javurek Rihan - RA: 11201920897
+  Tiago Luiz Silva de Araujo Pereira - RA: 11013316
+
+  Laboratório realizado dias 16 e 18 de Junho, relatório finalizado dia 23 de Junho
+  </pre></h3>
+
+  <h4>
+    Este primeiro relatório tratou de experimentos focados em captura de imágem e vídeo através de webcam, bem como sua manipulação, mduando cores,
+    velocidade de captura e afins. Os experimentos realizados foram seguindo um roteiro apresentado em aula dividido em duas partes, com tanto suas perguntas
+    quanto respostas apresentadas nos setores abaixo. Foram fornecidos códigos para tomarmos como base, que modificamos durante o experimento para adequar
+    ao que necessitavamos. As versões finais do código serão fornecidas abaixo, bem como para que foram usados.
+  </h4>
 
   <div class="button-group">
     <button onclick="toggleSection('parte1')">Parte 1</button>
     <button onclick="toggleSection('parte2')">Parte 2</button>
+    <button onclick="toggleSection('scriptsRel1')">Códigos</button>
+
   </div>
 
   <div id="parte1" class="relatorio-section" style="display: none;">
@@ -53,5 +69,136 @@ Já o problema da velocidade reduzida se dá pelo fato do FPS do VideoWriter est
   <div id="parte2" class="relatorio-section" style="display: none;">
     <h3>Parte 2</h3>
     <p>Texto da Parte 2 do relatório.</p>
+  </div>
+  <div id="scriptsRel1" class="relatorio-section" style="display: none;">
+    <h3>Códigos utilizados</h3>
+    <p>Abaixo estão os códigos que utilizamos para executar os experimentos:</p>
+    <div class="button-group">
+    <button onclick="toggleSection('code1')">Código 1 - Leitura de Imágem</button>
+    <button onclick="toggleSection('code2')">Código 2 - Leitura de Vídeo</button>
+    <button onclick="toggleSection('code3')">Código 3 - Captura de Imágem</button>
+    <button onclick="toggleSection('code4')">Código 4 - Captura de Vídeo</button>
+  </div>
+  <div id="code1" class="relatorio-section" style="display: none;">
+    <p>Este primeiro código foi utilizado na parte 1 - A, e realiza uma leitura de imágem.</p>
+    <code><pre>
+      import numpy as np
+      import cv2 as cv
+
+      img = cv.imread('messi5.jpg',0)
+      cv.imshow('image',img)
+      k = cv.waitKey(0)
+      if k == 27:         # wait for ESC key to exit
+          cv.destroyAllWindows()
+      elif k == ord('s'): # wait for 's' key to save and exit
+          cv.imwrite('messigray.png',img)
+          cv.destroyAllWindows()
+    </pre></code>
+  </div>
+  <div id="code2" class="relatorio-section" style="display: none;">
+    <p>Este código foi utilizado na parte 1 - B, e realiza uma leitura de vídeo. O código foi manipulado para mudar a velocidade de execução do vídeo.</p>
+    <code><pre>
+      import time
+      import numpy as np
+      import cv2 as cv
+
+      cap = cv.VideoCapture('big_buck_bunny.mp4')
+
+      while(cap.isOpened()):
+          ret, frame = cap.read()
+
+          if ret==True:
+              # show the frame
+              cv.imshow('frame',frame)
+
+              #wait next frame by 40ms - 25fps
+              time.sleep(1/1000.0) 
+
+              if cv.waitKey(1) & 0xFF == ord('q'):
+                  break
+          else:
+              break
+
+      cap.release()
+      cv.destroyAllWindows()cv.destroyAllWindows()
+    </pre></code>
+  </div>
+    <div id="code3" class="relatorio-section" style="display: none;">
+          <p>Este código foi utilizado na parte 1 - C e na 2 - A. O código mostra em tempo real o que está sendo capturado pela webcam conectada, e 
+            permite clicar em um botão para salvar a imágem mostrada no momento.
+          </p>
+          <pre><code>
+            import numpy as np
+            import cv2 as cv
+
+            cap = cv.VideoCapture(0)
+            img_counter = 0
+
+            if not cap.isOpened():
+                print("Cannot open camera")
+                exit()
+
+            while True:
+                # Capture frame-by-frame
+                ret, frame = cap.read()
+                # if frame is read correctly ret is True
+                if not ret:
+                    print("Can't receive frame (stream end?). Exiting ...")
+                    break
+
+                # Display the resulting frame
+                cv.imshow('frame', frame)
+
+                cvVal = cv.waitKey(1)
+                if cvVal == ord('q'):
+                    break
+                elif cvVal == ord('x'):
+                    img_name = "foto{}.png".format(img_counter)
+                    cv.imwrite(img_name, frame)
+                    img_counter +=1
+
+            # When everything done, release the capture
+            cap.release()
+            cv.destroyAllWindows()
+          </code></pre>
+    </div>
+        <div id="code4" class="relatorio-section" style="display: none;">
+          <p>Este código foi utilizado na parte 1 - D e na 2 - C. O código mostra em tempo real o que está sendo capturado pela webcam conectada, e captura em vídeo o que 
+            é exibido desde sua abertura até seu fechamento.
+          </p>
+          <pre><code>
+            import numpy as np
+            import cv2 as cv
+            cap = cv.VideoCapture(0)
+
+            # Get current width of frame
+            width = cap.get(cv.CAP_PROP_FRAME_WIDTH)   # float
+            # Get current height of frame
+            height = cap.get(cv.CAP_PROP_FRAME_HEIGHT) # float
+            # Define Video Frame Rate in fps
+            fps = 30.0
+
+            # Define the codec and create VideoWriter object
+            fourcc = cv.VideoWriter_fourcc(*'XVID')
+            out = cv.VideoWriter('saida.avi', fourcc, fps, (int(width),int(height)) )
+
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    print("Can't receive frame (stream end?). Exiting ...")
+                    break
+                frame = cv.flip(frame, 1)
+                # write the flipped frame
+                out.write(frame)
+                cv.imshow('frame', frame)
+                if cv.waitKey(1) == ord('q'):
+                    break
+
+            # Release everything if job is finished
+            cap.release()
+            out.release()
+            cv.destroyAllWindows()
+          </code></pre>
+          </div>
   </div>
 </div>
