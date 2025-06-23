@@ -58,6 +58,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    filter: invert(1);
 }
 
 
@@ -75,7 +76,7 @@ body {
 
 .button-name{
   padding-left: 10%;
-  color: black; 
+  color: white; 
   font-weight: bold;
   font-size: 1.5rem;
 
