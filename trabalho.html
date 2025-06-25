@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabalho</title>
+  <link rel="stylesheet" href="style_trabalho.css">
+</head>
+<body>
+
+<header style="display: flex; align-items: center; justify-content: left; gap: 15px; padding: 10px;">
+    <a href="index.html">
+        <img src="images/olho.jpg" alt="Voltar à Página Inicial" style="height: 40px; cursor: pointer; padding-right: 150px;">
+    </a>
+    <span>Trabalho de Visão Computacional - Sistema tradutor de Libras para texto em português</span>
+</header>
+
+
+  <div class="container">
+    <div class="sidebar">
+        <button onclick="showContent('pagina1')">Etapa 0</button>
+        <button onclick="showContent('pagina2')">Etapa 1</button>
+        <button onclick="showContent('modelagem-funcional')">Etapa 2</button>
+    </div>
+    <div class="content">
+        <div id="pagina1" class="content-section">
+            <h2>Etapa 0 - Entrevistas Empáticas</h2>
+            <p>Ainda será adicionado.</p>
+        </div>
+        <div id="pagina2" class="content-section hidden">
+            <h2>Etapa 1 - Contexto e Cenário de Aplicação (CA)</h2>
+            <p>Ainda será adicionado.</p>
+        </div>
+        <div class="content-section hidden" id="modelagem-funcional">
+            <h2 style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                Modelagem Funcional do Sistema
+                <a href="etapa2_trabalho/modelagem-funcional.pdf" target="_blank" title="Abrir PDF">
+                    📄
+                </a>
+            </h2>
+
+            <p>Este documento traz uma breve visão geral sobre o cenário de aplicação escolhido pelo grupo para o sistema de tradução de Libras para texto. Na sequência, é apresentado um diagrama de blocos seguido da descrição de cada parte do mesmo, com o objetivo de apresentar as etapas do funcionamento do sistema, seu fluxo de dados e o detalhamento das informações de entrada, de saída e do processamento realizado em cada bloco.</p>
+
+            <h3 style="margin-bottom: 5px; margin-top: 5px;">Visão Geral do Sistema</h3>
+            <p>O sistema a ser desenvolvido pela equipe será um protótipo que utilizará técnicas de Visão Computacional e Processamento de Vídeo para traduzir sinais específicos de Libras para texto escrito em português. Além disso, o sistema terá como foco a utilização em clínicas e hospitais, sendo capaz de reconhecer sinais usados em triagem de pronto-socorro ou em consultas clínicas básicas como sintomas, dores, respostas simples como "sim", "não", "febre", "dor de cabeça", entre outras.</p>
+
+            <p>O sistema será composto por alguns módulos que atuam de forma sequencial. A entrada principal será um vídeo capturado em tempo real de uma pessoa sinalizando em Libras. O processamento envolverá a captura desse vídeo, pré-processamento de frames, extração de características, classificação dos sinais e, por fim, a exibição do texto traduzido.</p>
+
+            <h3 style="margin-bottom: 5px; margin-top: 5px;">Diagrama de Blocos</h3>
+            <img src="etapa2_trabalho/diagrama_blocos_etapa2_trabalho.png" alt="Diagrama de Blocos" style="display: block; margin: 0 auto; max-width: 100%; height: auto;">
+
+            <h3 style="margin-bottom: 5px; margin-top: 5px;">Descrição dos Blocos do Sistema</h3>
+            <table border="1" cellpadding="10" cellspacing="0" style="border-collapse: collapse; width: 100%;">
+                <thead>
+                    <tr style="background-color: #f0f0f0;">
+                        <th>Bloco</th>
+                        <th>Entrada</th>
+                        <th>Processamento</th>
+                        <th>Saída</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Captura de vídeo com câmera</td>
+                        <td>Vídeo em tempo real</td>
+                        <td>Captura contínua de frames</td>
+                        <td>Sequência de frames</td>
+                    </tr>
+                    <tr>
+                        <td>Pré-processamento dos frames</td>
+                        <td>Frames</td>
+                        <td>Remoção de ruído, filtros, ajuste de contraste</td>
+                        <td>Imagens tratadas</td>
+                    </tr>
+                    <tr>
+                        <td>Detecção de regiões de interesse</td>
+                        <td>Imagem tratada</td>
+                        <td>Segmentação para isolar mãos e braços</td>
+                        <td>Regiões de interesse</td>
+                    </tr>
+                    <tr>
+                        <td>Extração de características</td>
+                        <td>Região de interesse</td>
+                        <td>Extração de formas, contornos, pontos</td>
+                        <td>Vetor de características</td>
+                    </tr>
+                    <tr>
+                        <td>Classificação de sinais</td>
+                        <td>Vetor de características</td>
+                        <td>Modelo de Machine Learning para reconhecer sinais</td>
+                        <td>Rótulo do sinal</td>
+                    </tr>
+                    <tr>
+                        <td>Geração de texto</td>
+                        <td>Rótulo do sinal</td>
+                        <td>Conversão do rótulo reconhecido para texto</td>
+                        <td>Texto em português</td>
+                    </tr>
+                    <tr>
+                        <td>Exibição do texto</td>
+                        <td>Texto</td>
+                        <td>Exibição na interface</td>
+                        <td>Texto exibido na tela</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-bottom: 5px; margin-top: 5px;">Tecnologias Previstas</h3>
+            <ul style="padding-left: 20px;">
+                <li><strong>Linguagem de programação:</strong> Python</li>
+                <li><strong>Bibliotecas:</strong> OpenCV, TensorFlow/Keras, etc.</li>
+                <li><strong>Dispositivo de Entrada:</strong> Webcam ou câmera de celular</li>
+                <li><strong>Dispositivo de Saída:</strong> Tela de computador ou smartphone</li>
+            </ul>
+        </div>
+    </div>
+
+  <script>
+    function showContent(id) {
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(section => {
+        section.classList.add('hidden');
+      });
+      document.getElementById(id).classList.remove('hidden');
+    }
+  </script>
+
+</body>
+</html>
