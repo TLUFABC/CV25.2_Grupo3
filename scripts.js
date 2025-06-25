@@ -24,3 +24,4 @@ function toggleSection(sectionId) {
   const isVisible = section.style.display === 'block';
   section.style.display = isVisible ? 'none' : 'block';
 }
+

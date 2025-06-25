@@ -7,102 +7,54 @@
 
   Laboratório realizado dias 16 e 18 de Junho, relatório finalizado dia 23 de Junho
   </pre></h3>
-
-  <h4>
+  <h2>Introdução</h2>
+  <p>
     Este primeiro relatório tratou de experimentos focados em captura de imágem e vídeo através de webcam, bem como sua manipulação, mduando cores,
-    velocidade de captura e afins. Os experimentos realizados foram seguindo um roteiro apresentado em aula dividido em duas partes, com tanto suas perguntas
-    quanto respostas apresentadas nos setores abaixo. Foram fornecidos códigos para tomarmos como base, que modificamos durante o experimento para adequar
-    ao que necessitavamos. As versões finais do código serão fornecidas abaixo, bem como para que foram usados.
-  </h4>
+    velocidade de captura e afins. Os experimentos realizados foram seguindo um roteiro apresentado em aula dividido em duas partes, e tinha como objetivo estudar o uso
+    do OpenCV e nos familiarizar com a visualização e processamento de imágem e vídeo de forma geral. Foram fornecidos códigos para tomarmos como base, que modificamos
+     durante o experimento para adequar ao que necessitavamos. Os arquivos abaixo foram fornecidos como roteiro para a atividade, contendo o PDF que seguimos para realizar os experimentos,
+     os códigos iniciais e uma immágem e vídeo que foram utilizados nos experimentos. Os experimentos consistiram inicialmente na leitura de imágem e vídeo, e então na captura das 
+     mesmas através de uma webcam conectada ao computador.
+  </p>
+  <h2>Arquivos base para reproduzir o procedimento:</h2>
+  <ul>
+    <li><a href="relatorio1/esza019_2025.2__Lab1_img_video_.pdf" download class="download-link">📄 Baixar Roteiro (PDF)</a></li>
+    <li><a href="relatorio1/Lab1_arquivos.zip" download class="download-link">📦 Baixar Códigos Fonte (ZIP)</a></li>
+  </ul>
 
+    <h2>Procedimentos Experimentais</h2>
+      <!-- Parte 1 - A -->
+
+  <p>
+    O primeiro experimento consiste na leitura de uma imágem utilizando o OpenCV. Para este, foram utilizadas a imágem messi5.jpg e o código L1_1_img.py fornecidos acima. Para isto,
+    o computador tem que ter o Python instalado, assim como OpenCV (pip install opencv-python) e numpy (pip install numpy). Feito isso, basta executar L1_1_img.py com o python, tendo
+    a imágem que será lida (no nosso caso, messi5.jpg) na mesma pasta que o código. Ao realizarmos a leitura pela primeira vez, podemos ver que foi aberta uma janela do openCV que 
+    exibe a imágem, porém ela é exibida em preto e branco: 
+  </p>
+  <div class="image-container">
+    <img src="relatorio1/messi5Original.png" alt="Imagem na leitura original" class="relatorio-image">
+    <p class="image-caption"><em>Imágem lida pelo código original, sem modifica-lo</em></p>
+  </div>
+  <p>
+    Como podemos ver, a imágem veio em preto e branco. Vamos agora analisar o código utlilzado. Na primeira linha depois dos imports, temos um imread, passando como parametro o 
+    caminho para nossa imágem e em seguida um número, 0. Como podemos ver na documentação do openCV, este segundo parametro que estamos passando trata da cor da imágem. O 0 consiste
+    no preto e branco, portanto foi por isso que nossa imágem final apareceu desta forma. Para alterarmos isso podemos passar o parametro 1, que consiste no colorido padrão, ou podemos
+    simplesmente não passar mais nenhum argumento após o caminho da imágem como o colorido é o default do comando. Modificando nosso código, podemos ver como a imágem é lida novamente:
+  </p>
+  <div class="image-container">
+    <img src="relatorio1/messi5.png" alt="Imagem" class="relatorio-image">
+    <p class="image-caption"><em>Imágem lida pelo código modificado</em></p>
+  </div>
+  Abaixo temos o código com a mudança realizada:
   <div class="button-group">
-    <button onclick="toggleSection('parte1')">Parte 1</button>
-    <button onclick="toggleSection('parte2')">Parte 2</button>
-    <button onclick="toggleSection('scriptsRel1')">Códigos</button>
-
-  </div>
-
-  <div id="parte1" class="relatorio-section" style="display: none;">
-    <h3>(A)Por que a janela aberta não mostra a imagem colorida?</h3>
-    <p>A janela aberta mostra a imagem em tons cinza pois a chamada da função imread(), que é a função que carrega uma imagem de um caminho específico para um programa, apresentava  o parâmetro 0 após o nome do arquivo a ser carregado. 
-[ img = cv.imread('messi5.jpg',0) ]. Caso quisessem imprimir a imagem colorida poderíamos enviar apenas o nome da imagem, ou mudar o segundo parâmetro de 0 para 1.</p>
-<h3>(B)Qual a explicação de alteração de velocidade de exibição, e apresente suas soluções detalhadamente.</h3>
-<p>Nossa solução para alterar a velocidade de exibição foi alterar o valor do time.sleep(). Aumentando o valor divisor, temos um valor final menor, e portanto menor espera entre frames. Isto gera um vídeo exibindo mais rapidamente. Da mesma forma, podemos diminuir o valor do divisor, aumentando o valor de espera entre frames e assim causando um vídeo mais lento.
-
-Exemplo de valor alterado para um vídeo muito mais rápido:</p>
-<code>time.sleep(1/1000.0)</code>
-
-
-<h3>(C)Altere: modifique o programa para que uma imagem da câmera seja salva num arquivo “foto1.png” no momento em que for clicada a tecla ‘x’ no teclado. Apresente o resultado e sua solução detalhadamente.</h3>
-	<p>Inicialmente tentamos inserir uma outra linha com if cv.waitKey(1), verificando se o valor era igual a x, e então realizando um imwrite
-         passando o nome desejado e o frame previamente definido. Esta solução era capaz de salvar a imagem conforme desejado, mas notamos que 
-         algumas vezes nosso click parecia não ser registrado e só algumas vezes a imagem era salva. Percebemos que isto acontecia porque como 
-         tínhamos dois waitKeys, o programa estava alternando entre os dois e verificando apenas uma das teclas de cada vez. Para resolver este
-          problema, definimos uma variável como o valor da waitKey, fora dos ifs, e então realizamos a verificação do valor da tecla recebida 
-          pela variável. Por fim, definimos um img_counter e utilizamos ele para iterar o nome da foto, para podermos salvar várias fotos em 
-          seguida sem uma sobrescrever a outra por terem o mesmo nome.</p>
-
-	<pre><code>
-    img_counter = 0
-    cvVal = cv.waitKey(1)
-    if cvVal == ord('q'):
-        break
-    elif cvVal == ord('x'):
-        img_name = "foto{}.png".format(img_counter)
-        cv.imwrite(img_name, frame)
-        img_counter += 1
-</code></pre>
-
-
-
-<h3>(D)Altere: modifique o programa para que as imagens gravadas estejam “normais” no arquivo de vídeo salvo, e apresentem uma velocidade de exibição adequada. Apresente o resultado e sua solução detalhadamente</h3>
-
-No arquivo de vídeo salvo, a imagem apresenta dois problemas: imagem invertida e velocidade reduzida.
-
-O problema da imagem invertida se dá pelo fato de usarem a função cv.flip() para realizarem a inversão do frame do vídeo, antes de rodar a função write() no objeto do VideoWriter criado. [ frame = cv.flip(frame, 0) ]
-
-Já o problema da velocidade reduzida se dá pelo fato do FPS do VideoWriter estar setado com um valor baixo de 10 fps, e foi resolvido aumentando esse valor para 30.
-
-</p>
-  </div>
-
-  <div id="parte2" class="relatorio-section" style="display: none;">
-    <h3>(A) Obter com a webcam uma foto geral com TODOS os integrantes da EQUIPE, sendo que cada um
-deve usar uma roupa de cor diferente, melhor se for com as cores Vermelho, Verde e Azul
-destacadas. Cuidem para a iluminação ficar boa. Podem usar qualquer editor de imagem caso
-necessitem “Compor” as fotos individuais para formar a foto geral.</h3>
-    <img class="profile-image" src="images/fotoDos3.png"></br>
-    <h3>(B) Façam uma foto-montagem “Avatar”, juntando todos avatares numa única imagem. Meu
-“Avatar” por exemplo, é o Pikachu... A ordem dos avatares deve ser a mesma da foto geral.
-Podem usar qualquer editor de imagem para “Compor” as fotos individuais que cada um da
-equipe vai fornecer</h3>
-    <img class="profile-image" src="images/avatarDos3.png">
-    <h3>(C) Filmem com a webcam DOIS vídeos com pessoas e DOIS videos com um objeto:</h3>
-    <h3>    i) um com mudanças lentas de movimento:</h3>
-    
-    <h3>    ii) e outro com mudanças rápidas de movimento.</h3>
-
-
-    <p> Todos os vídeos foram gravados utilizando o programa 4 fornecido na aba de códigos.
-
-
-  </div>
-  <div id="scriptsRel1" class="relatorio-section" style="display: none;">
-    <h3>Códigos utilizados</h3>
-    <p>Abaixo estão os códigos que utilizamos para executar os experimentos:</p>
-    <div class="button-group">
-    <button onclick="toggleSection('code1')">Código 1 - Leitura de Imágem</button>
-    <button onclick="toggleSection('code2')">Código 2 - Leitura de Vídeo</button>
-    <button onclick="toggleSection('code3')">Código 3 - Captura de Imágem</button>
-    <button onclick="toggleSection('code4')">Código 4 - Captura de Vídeo</button>
+    <button onclick="toggleSection('code1')">Código 1 Modificado</button>
   </div>
   <div id="code1" class="relatorio-section" style="display: none;">
-    <p>Este primeiro código foi utilizado na parte 1 - A, e realiza uma leitura de imágem.</p>
-    <code><pre>
+      <code><pre>
       import numpy as np
       import cv2 as cv
 
-      img = cv.imread('messi5.jpg',0)
+      img = cv.imread('messi5.jpg')
       cv.imshow('image',img)
       k = cv.waitKey(0)
       if k == 27:         # wait for ESC key to exit
@@ -112,8 +64,26 @@ equipe vai fornecer</h3>
           cv.destroyAllWindows()
     </pre></code>
   </div>
+  <!-- Parte 1 - B -->
+
+  <p>
+    Em seguida, realizamos um experimento semelhante mas tratando de leitura de vídeo. Para isto, foram utilizados o segundo código e o vídeo
+    big_buck_bunny, ambos presentes nos arquivos fornecidos. Ao rodarmos o arquivo, podemos ver que o vídeo já é apresentado normalmente e 
+    em velocidade normal. Neste experimento, buscamos analisar como funciona a leitura de vídeos pelo openCV. Para isto, vamos tentar alterar
+    a velocidade de reprodução do vídeo. Vendo o código, que está inclusive comentado, podemos ver que a exibição do vídeo está sendo feita 
+    por modo de exibição de frames, um de cada vez e em sequência. Portanto, se queremos alterar a velocidade do vídeo, basta mudarmos o tempo
+    que esperamos entre a exibição de um frame e do próximo, portanto alterando o valor de time.sleep(1/25.0). Para demonstrar, alteramos o 
+    valor para time.sleep(1/100.0), e como resultado ao rodar o programa tivemos um vídeo acelerado: 
+  </p>
+
+  <video controls width="640">
+    <source src="relatorio1/big_buck_bunny_accelerated.mp4" type="video/mp4">
+  </video>
+
+  <div class="button-group">
+    <button onclick="toggleSection('code2')">Código 2 Modificado</button>
+  </div>
   <div id="code2" class="relatorio-section" style="display: none;">
-    <p>Este código foi utilizado na parte 1 - B, e realiza uma leitura de vídeo. O código foi manipulado para mudar a velocidade de execução do vídeo.</p>
     <code><pre>
       import time
       import numpy as np
@@ -129,7 +99,7 @@ equipe vai fornecer</h3>
               cv.imshow('frame',frame)
 
               #wait next frame by 40ms - 25fps
-              time.sleep(1/1000.0) 
+              time.sleep(1/100.0) 
 
               if cv.waitKey(1) & 0xFF == ord('q'):
                   break
@@ -140,10 +110,27 @@ equipe vai fornecer</h3>
       cv.destroyAllWindows()cv.destroyAllWindows()
     </pre></code>
   </div>
-    <div id="code3" class="relatorio-section" style="display: none;">
-          <p>Este código foi utilizado na parte 1 - C e na 2 - A. O código mostra em tempo real o que está sendo capturado pela webcam conectada, e 
-            permite clicar em um botão para salvar a imágem mostrada no momento.
-          </p>
+
+    <!-- Parte 1 - C  e 2 - A e B -->
+  <p>
+    O proximo experimento consistiu em  conectar uma webcam ao computador e realizar a leitura e captura de imágens através desta. Para isso, 
+    foi usado o programa 3 fornecido. O programa fornecido já é capaz de identificar a webcam e visualizar imágens através desta, então apenas 
+    precisamos modifica-lo para salvar a imágem que está sendo exibida quando quisermos. Para isso, utilizamos a função imwrite do openCV.
+    Inicialmente tentamos inserir uma outra linha com if cv.waitKey(1), verificando se o valor era igual a x, e então realizando um imwrite 
+    passando o nome desejado e o frame previamente definido. Esta solução era capaz de salvar a imagem conforme desejado, mas notamos que 
+    algumas vezes nosso click parecia não ser registrado e só algumas vezes a imagem era salva. Percebemos que isto acontecia porque como 
+    tínhamos dois waitKeys, o programa estava alternando entre os dois e verificando apenas uma das teclas de cada vez. Para resolver este
+    problema, definimos uma variável como o valor da waitKey, fora dos ifs, e então realizamos a verificação do valor da tecla recebida pela
+    variável. Por fim, definimos um img_counter e utilizamos ele para iterar o nome da foto, para podermos salvar várias fotos em seguida sem
+    uma sobrescrever a outra por terem o mesmo nome. Utilizamos deste programa modificado para tirar fotos de todos do grupo:
+  </p>
+
+  <img class="profile-image" src="images/fotoDos3.png"></br>
+
+  <div class="button-group">
+    <button onclick="toggleSection('code3')">Código 3 Modificado</button>
+  </div>
+  <div id="code3" class="relatorio-section" style="display: none;">
           <pre><code>
             import numpy as np
             import cv2 as cv
@@ -179,10 +166,62 @@ equipe vai fornecer</h3>
             cv.destroyAllWindows()
           </code></pre>
     </div>
-        <div id="code4" class="relatorio-section" style="display: none;">
-          <p>Este código foi utilizado na parte 1 - D e na 2 - C. O código mostra em tempo real o que está sendo capturado pela webcam conectada, e captura em vídeo o que 
-            é exibido desde sua abertura até seu fechamento.
-          </p>
+    <p>
+      Seguindo ainda o script no PDF, escolhemos "avatares" para cada integrante do grupo, mostrando eles aqui na mesma sequência da foto:
+    </p>
+    <img class="profile-image" src="images/avatarDos3.png">
+
+    <!-- Parte 1 - D  e 2 - C -->
+
+    <p>
+      Por fim, realizamos experimentos com captura de vídeo. Para isso, tomamos como base o código 4 fornecido. Porém, podemos ver que ao 
+      rodarmos este, podemos notar que a imágem está sendo exibida de forma invertida, e o vídeo salvo está muito mais lento que a velocidade
+      real:
+    </p>
+    <video controls width="640">
+        <source src="relatorio1/saida.mp4" type="video/mp4">
+    </video>
+    <p>
+      Olhamos o código e vimos que o problema da imagem invertida se dá pelo fato de usarem a função cv.flip() para realizarem a inversão do 
+      frame do vídeo, antes de rodar a função write() no objeto do VideoWriter criado. [ frame = cv.flip(frame, 0) ] Já o problema da 
+      velocidade reduzida se dá pelo fato do FPS do VideoWriter estar setado com um valor baixo de 10 fps, e foi resolvido aumentando esse 
+      valor para 30. Após realizarmos estas modificações, utilizamos de nosso código alterado para gravar alguns vídeos de teste:
+    </p>
+    <div class="video-section">
+    <h2>Vídeos de Movimento</h2>
+
+    <div class="video-container">
+      <h3>Movimento rápido - Membro</h3>
+      <video controls muted width="640">
+        <source src="videos/Movimento_rapido_membro.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="video-container">
+      <h3>Movimento rápido - Objeto</h3>
+      <video controls muted width="640">
+        <source src="videos/Movimento_rapido_objeto.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="video-container">
+      <h3>Movimento lento - Membro</h3>
+      <video controls muted width="640">
+        <source src="videos/movimento-lento-membro.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div class="video-container">
+      <h3>Movimento lento - Objeto</h3>
+      <video controls muted width="640">
+        <source src="videos/movimento-lento-objeto.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+  <div class="button-group">
+    <button onclick="toggleSection('code4')">Código 4 Modificado</button>
+  </div>
+  <div id="code4" class="relatorio-section" style="display: none;">
           <pre><code>
             import numpy as np
             import cv2 as cv
@@ -216,6 +255,20 @@ equipe vai fornecer</h3>
             out.release()
             cv.destroyAllWindows()
           </code></pre>
-          </div>
+    </div>
+    <h2>Análise e discussão</h2>
+    <h2>Conclusões</h2>
+    <div class="referencias">
+    <h2>Referências</h2>
+    <ul>
+      <li>MINICHINO, J.; HOWSE, J. <em>Learning OpenCV 3 Computer Vision with Python</em>, 2nd Ed, Packt Publishing, 2015.</li>
+      <li><a href="https://docs.opencv.org/master/d6/d00/tutorial_py_root.html" target="_blank">Tutorial OpenCV e Python</a></li>
+      <li><a href="https://docs.opencv.org/4.x/db/deb/tutorial_display_image.html" target="_blank">Getting Started with Images</a></li>
+      <li><a href="https://docs.opencv.org/4.x/dd/d43/tutorial_py_video_display.html" target="_blank">Getting Started with Videos</a></li>
+      <li><a href="https://convertio.co/pt/download/d7eb0266a724e277f8adc4397b56ba98acf727/" target="_blank">Convertio - Download de vídeo convertido</a></li>
+      <li><a href="https://www.geeksforgeeks.org/python/python-opencv-cv2-imread-method/" target="_blank">GeeksforGeeks - cv2.imread()</a></li>
+      <li><a href="https://docs.opencv.org/3.4/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce" target="_blank">OpenCV Imgcodecs Reference</a></li>
+    </ul>
   </div>
+
 </div>

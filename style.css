@@ -114,3 +114,34 @@ body {
 .profile-image{
   width: 75%;
 }
+
+.download-link {
+  display: inline-block;
+  padding: 10px 16px;
+  margin: 8px 0;
+  background-color: #4CAF50; /* Green */
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+.download-link:hover {
+  background-color: #45a049;
+}
+
+.image-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.relatorio-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.image-caption {
+  margin-top: 8px;
+  font-style: italic;
+}
