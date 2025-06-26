@@ -1,0 +1,130 @@
+<div class="relatorio-container">
+  <h2>Relatório 2 - Calibração de Cameras</h2>
+  <h3><pre>
+  Leonardo Severgnine Maioli - RA: 11201920579
+  Ricardo Javurek Rihan - RA: 11201920897
+  Tiago Luiz Silva de Araujo Pereira - RA: 11013316
+
+  Laboratório realizado dias 25 de Junho, relatório finalizado dia
+  </pre></h3>
+  <h2>Introdução</h2>
+  <p>
+    A calibração de câmeras é um processo fundamental em Visão Computacional, permitindo a correção de distorções da lente e a determinação dos 
+    parâmetros intrínsecos e extrínsecos da câmera. Esses parâmetros são essenciais para aplicações como reconstrução 3D, realidade aumentada, 
+    navegação de robôs e medições precisas em imagens. Neste segundo relatório, realizamos três etapas principais: Calibração com imagens pré-capturadas, 
+    Calibração de uma webcam pessoal e a Correção de distorção em imagens.
+  </p>
+  <h2>Arquivos base para reproduzir o procedimento:</h2>
+  <ul>
+    <li><a href="relatorio2/esza019_2025.2__Lab2_calib_v2.pdf" download class="download-link">📄 Baixar Roteiro (PDF)</a></li>
+    <li><a href="relatorio2/Lab2_arquivos.zip" download class="download-link">📦 Baixar Códigos Fonte (ZIP)</a></li>
+  </ul>
+
+    <h2>Procedimentos Experimentais</h2>
+      <!-- Parte 1 - A -->
+
+  <p>
+    O primeiro experimento consiste em realizar a calibração da camera sendo utilizada apartir de imagens disponibilizadas de uma tabuleiro 6x9
+    sendo registrado de diversos angulos.
+  </p>
+  <div class="image-container">
+    <img src="relatorio1/foto1.png" alt="Imagem na leitura original" class="relatorio-image">
+    <p class="image-caption"><em>Imágem original disponibilizada</em></p>
+  </div>
+  <p>
+    Agora através do código disponibilizado, tanto pelo relatório quanto pelo site learnopencv.com, conseguimos realizar a detecção dos cantos da imagem 
+    sendo segurada pelo homem atravez de parametros definido em código, sendo nesse caso a distancia de 3 centimetro entre cada quadrado
+  </p>
+  <div class="image-container">
+    <img src="relatorio1/foto2.png" alt="Imagem" class="relatorio-image">
+    <p class="image-caption"><em>Imágem lida pelo código modificado</em></p>
+  </div>
+  Abaixo temos o código com a mudança realizada:
+  <div class="button-group">
+    <button onclick="toggleSection('code1')">Código 1 Modificado</button>
+  </div>
+  <div id="code1" class="relatorio-section" style="display: none;">
+      <code><pre>
+      
+    </pre></code>
+  </div>
+  <p>Parâmetros Obtidos
+
+Ao executar o programa L2_cal.py com as imagens de exemplo, os seguintes parâmetros são calculados:
+
+    Matriz K (Matriz de Calibração Intrínseca):
+
+text
+
+K = [[fx  0  cx]
+     [ 0 fy  cy]
+     [ 0  0   1]]
+
+Onde:
+
+    fx, fy: distância focal em pixels nos eixos x e y
+
+    cx, cy: coordenadas do ponto principal (centro óptico) na imagem
+
+    Matriz R (Matriz de Rotação): Uma lista de matrizes 3x3 (uma para cada imagem), representando a orientação da câmera em relação ao padrão de calibração.
+
+    Vetor t (Vetor de Translação): Uma lista de vetores 3x1 (um para cada imagem), representando a posição da câmera em relação ao padrão de calibração.
+
+    Vetor dist (Coeficientes de Distorção):
+
+text
+
+dist = [k1, k2, p1, p2, k3]
+
+Onde:
+
+    k1, k2, k3: coeficientes de distorção radial
+
+    p1, p2: coeficientes de distorção tangencial
+
+Significado dos Parâmetros
+
+    Matriz K (Intrínsecos):
+
+        Transforma coordenadas 3D do sistema de coordenadas da câmera em coordenadas 2D na imagem
+
+        Captura as características ópticas internas da câmera
+
+        É constante para uma determinada câmera e configuração de lente
+
+    Matriz R e Vetor t (Extrínsecos):
+
+        Descrevem a posição e orientação da câmera no mundo 3D
+
+        R: como a câmera está rotacionada em relação ao padrão de calibração
+
+        t: onde a câmera está localizada em relação ao padrão de calibração
+
+        Variam para cada imagem, pois dependem da posição relativa entre câmera e tabuleiro
+
+    Vetor dist (Distorção):
+
+        Modela as imperfeições da lente que fazem com que as linhas retas apareçam curvas na imagem
+
+        Distorção radial: causa efeito "barril" ou "almofada"
+
+        Distorção tangencial: causada por desalinhamento dos elementos da lente
+
+Estes parâmetros são essenciais para aplicações de visão computacional que requerem medidas precisas a partir de imagens, como reconstrução 3D, realidade aumentada ou navegação de robôs.
+</p>
+    <h2>Análise e Discussão</h2>
+    <p>
+      
+    </p>
+  <h2>Conclusões</h2>
+  <p>
+    
+  </p>
+    <div class="referencias">
+    <h2>Referências</h2>
+    <ul>
+      <li><a href="" target="_blank">OpenCV Imgcodecs Reference</a></li>
+    </ul>
+  </div>
+
+</div>
