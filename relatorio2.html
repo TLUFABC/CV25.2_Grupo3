@@ -24,11 +24,11 @@
       <!-- Parte 1 - A -->
 
   <p>
-    O primeiro experimento consiste em realizar a calibração da camera sendo utilizada apartir de imagens disponibilizadas de uma tabuleiro 6x9
-    sendo registrado de diversos angulos.
+    O primeiro experimento consiste em realizar a calibração da camera utilizando imagens disponibilizadas de uma tabuleiro 6x9
+    sendo registradas de diversos angulos.
   </p>
   <div class="image-container">
-    <img src="relatorio1/foto1.png" alt="Imagem na leitura original" class="relatorio-image">
+    <img src="relatorio2/foto1.jpg" alt="Imagem na leitura original" class="relatorio-image">
     <p class="image-caption"><em>Imágem original disponibilizada</em></p>
   </div>
   <p>
@@ -36,64 +36,40 @@
     sendo segurada pelo homem atravez de parametros definido em código, sendo nesse caso a distancia de 3 centimetro entre cada quadrado
   </p>
   <div class="image-container">
-    <img src="relatorio1/foto2.png" alt="Imagem" class="relatorio-image">
+    <img src="relatorio2/foto2.jpg" alt="Imagem" class="relatorio-image">
     <p class="image-caption"><em>Imágem lida pelo código modificado</em></p>
   </div>
-  Abaixo temos o código com a mudança realizada:
+  Inicialmente, com o código original, ele conseguia detectar apenas um grid 6X8, com distancias definadas em 3cm, isso por que, dentro do código, foi 
+  definido que ele encontrasse um grid nessas especificações, porém modificamos ele para que conseguisse detectar o grid por completo (6X9). 
+  Segue o trecho do código modificado:
   <div class="button-group">
     <button onclick="toggleSection('code1')">Código 1 Modificado</button>
   </div>
   <div id="code1" class="relatorio-section" style="display: none;">
       <code><pre>
+      .....
+      import glob
+ 
+      # Defining the dimensions of checkerboard
+      CHECKERBOARD = (6,9)
+      criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
       
+      # Creating vector to store vectors of 3D points for each checkerboard image
+      objpoints = []
+      .....
     </pre></code>
   </div>
-  <p>Parâmetros Obtidos
-
-Ao executar o programa L2_cal.py com as imagens de exemplo, os seguintes parâmetros são calculados:
-
-    Matriz K (Matriz de Calibração Intrínseca):
-
-text
-
-K = [[fx  0  cx]
-     [ 0 fy  cy]
-     [ 0  0   1]]
-
-Onde:
-
-    fx, fy: distância focal em pixels nos eixos x e y
-
-    cx, cy: coordenadas do ponto principal (centro óptico) na imagem
-
-    Matriz R (Matriz de Rotação): Uma lista de matrizes 3x3 (uma para cada imagem), representando a orientação da câmera em relação ao padrão de calibração.
-
-    Vetor t (Vetor de Translação): Uma lista de vetores 3x1 (um para cada imagem), representando a posição da câmera em relação ao padrão de calibração.
-
-    Vetor dist (Coeficientes de Distorção):
-
-text
-
-dist = [k1, k2, p1, p2, k3]
-
-Onde:
-
-    k1, k2, k3: coeficientes de distorção radial
-
-    p1, p2: coeficientes de distorção tangencial
-
-Significado dos Parâmetros
-
-    Matriz K (Intrínsecos):
-
+  <h2>Parâmetros Obtidos</h2>
+  <h3>Matriz K (Intrínsecos):</h3>
+    <p>
         Transforma coordenadas 3D do sistema de coordenadas da câmera em coordenadas 2D na imagem
 
         Captura as características ópticas internas da câmera
 
         É constante para uma determinada câmera e configuração de lente
-
-    Matriz R e Vetor t (Extrínsecos):
-
+    </p>
+  <h3>Matriz R e Vetor t (Extrínsecos):</h3>
+    <p>
         Descrevem a posição e orientação da câmera no mundo 3D
 
         R: como a câmera está rotacionada em relação ao padrão de calibração
@@ -101,17 +77,18 @@ Significado dos Parâmetros
         t: onde a câmera está localizada em relação ao padrão de calibração
 
         Variam para cada imagem, pois dependem da posição relativa entre câmera e tabuleiro
-
-    Vetor dist (Distorção):
-
+    </p>
+  <h3>Vetor dist (Distorção):</h3>
+    <p>
         Modela as imperfeições da lente que fazem com que as linhas retas apareçam curvas na imagem
 
         Distorção radial: causa efeito "barril" ou "almofada"
 
         Distorção tangencial: causada por desalinhamento dos elementos da lente
-
-Estes parâmetros são essenciais para aplicações de visão computacional que requerem medidas precisas a partir de imagens, como reconstrução 3D, realidade aumentada ou navegação de robôs.
-</p>
+    </p> </br>
+    <p>Estes parâmetros são essenciais para aplicações de visão computacional que requerem medidas precisas a partir de imagens, como 
+      reconstrução 3D, realidade aumentada ou navegação de robôs.
+    </p>
     <h2>Análise e Discussão</h2>
     <p>
       
