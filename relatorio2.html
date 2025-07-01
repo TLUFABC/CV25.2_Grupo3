@@ -41,7 +41,7 @@
   </div>
   Inicialmente, com o código original, ele conseguia detectar apenas um grid 6X8, com distancias definadas em 3cm, isso por que, dentro do código, foi 
   definido que ele encontrasse um grid nessas especificações, porém modificamos ele para que conseguisse detectar o grid por completo (6X9). 
-  Segue o trecho do código modificado:
+  Segue o trecho do código modificado:</br>
   <div class="button-group">
     <button onclick="toggleSection('code1')">Código 1 Modificado</button>
   </div>
@@ -59,15 +59,33 @@
       .....
     </pre></code>
   </div>
+  
   <h2>Parâmetros Obtidos</h2>
-  <h3>Matriz K (Intrínsecos):</h3>
-    <p>
-        Transforma coordenadas 3D do sistema de coordenadas da câmera em coordenadas 2D na imagem
+  
+  <div style="margin: 20px 0;">
+  <div style="font-weight: bold; font-size: 18px; margin-bottom: 10px;">Matriz Intrínseca K</div>
+    <p>Transforma coordenadas 3D do sistema de coordenadas da câmera em coordenadas 2D na imagem, captura as características ópticas 
+      internas da câmera e é constante para uma determinada câmera e configuração de lente</p>
+    <table style="border-collapse: collapse;">
+      <tr>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">536.0734</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">342.3704</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">536.0164</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">235.5369</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">1</td>
+      </tr>
+    </table>
+  </div>
 
-        Captura as características ópticas internas da câmera
 
-        É constante para uma determinada câmera e configuração de lente
-    </p>
   <h3>Matriz R e Vetor t (Extrínsecos):</h3>
     <p>
         Descrevem a posição e orientação da câmera no mundo 3D
@@ -78,21 +96,58 @@
 
         Variam para cada imagem, pois dependem da posição relativa entre câmera e tabuleiro
     </p>
+    <p></p>
   <h3>Vetor dist (Distorção):</h3>
-    <p>
-        Modela as imperfeições da lente que fazem com que as linhas retas apareçam curvas na imagem
+    <p>Modela as imperfeições da lente que fazem com que as linhas retas apareçam curvas na imagem</p>
+    <p>D=[−0.2651−0.04670.0018−0.00030.2523]</p></br>
 
-        Distorção radial: causa efeito "barril" ou "almofada"
-
-        Distorção tangencial: causada por desalinhamento dos elementos da lente
-    </p> </br>
     <p>Estes parâmetros são essenciais para aplicações de visão computacional que requerem medidas precisas a partir de imagens, como 
       reconstrução 3D, realidade aumentada ou navegação de robôs.
-    </p>
-    <h2>Análise e Discussão</h2>
-    <p>
+    </p></br>
+
+  <p>Em seguida, utilizando uma webcam e um desenho de um grid, tiramos varias fotos do mesmo com o intuito de realizar a calibragem
+    da camera com essas imagens. E além disso, realizamos uma modificação no código, conforme solicitado, para que fosse utilizado o nome
+    de um dos integrantes ao tirar a foto. Segue uma das fotos tiradas para a calibragem e o trecho de código modificado:
+  </p>
+  
+  <div class="button-group">
+    <button onclick="toggleSection('code2')">Código 2 Modificado</button>
+  </div>
+  <div id="code2" class="relatorio-section" style="display: none;">
+    <code><pre>
+      .....
+      while True:
+      # Capture frame-by-frame
+      ret, frame = cap.read()
+      # if frame is read correctly ret is True
+      if not ret:
+      print("Can't receive frame (stream end?). Exiting ...")
+      break
       
-    </p>
+      # Display the resulting frame
+      cv.imshow('frame', frame)
+      
+      # Save on "s" key or exit on "q"
+      k = cv.waitKey(1) 
+      if  k == ord('s'):
+      cv.imwrite("Ricardo"+str(i)+".jpg",frame)
+      i = i + 1
+      print("frame", i)
+      elif k == ord('q'):
+      break
+      .....
+    </pre></code>
+  </div>
+  
+  <div class="image-container">
+    <img src="relatorio2/Ricardo6.jpg" alt="Imagem" class="relatorio-image">
+    <p class="image-caption"><em>Ricardo6.jpg</em></p>
+  </div>
+
+  <h2>Análise e Discussão</h2>
+  <p>
+      
+  </p>
   <h2>Conclusões</h2>
   <p>
     
