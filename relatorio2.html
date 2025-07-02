@@ -224,23 +224,21 @@
   </div>
   <div id="extrinsecos_webcam" class="relatorio-section" style="display: none;">
     <code><pre>
-  rvecs (exemplo):
+  rvecs (exemplos):
+  [-0.04507864], [0.21763651], [1.55225626]
   [ 0.33699863], [0.66226067], [1.68536465]
   [-0.67689141], [0.93845312], [1.36255251]
+  [ 0.18172914], [0.72261025], [1.60831353]
+  [-0.96847066], [0.4666609 ], [0.77270748]
 
-  tvecs (exemplo):
-  [3.40036748], [-1.77216632], [15.51420698]
-  [0.77770731], [-2.94733489], [15.38510949]
+  tvecs (exemplos):
+  [ 3.35407707], [-3.26016219], [11.65218327]
+  [ 2.81413345], [-2.59506535], [12.34149212]
+  [ 3.40036748], [-1.77216632], [15.51420698]
+  [ 2.34661926], [-3.13757235], [10.43821507]
+  [ 0.77770731], [-2.94733489], [15.38510949]
     </pre></code>
   </div>
-
-  <h4>Análise dos Parâmetros</h4>
-  <ul>
-    <li><strong>Focal Length:</strong> f<sub>x</sub> = 691.48 px, f<sub>y</sub> = 688.62 px – indicando lentes com distâncias focais próximas nos dois eixos.</li>
-    <li><strong>Aspect Ratio:</strong> f<sub>x</sub> / f<sub>y</sub> = 1.004 – muito próximo de 1, o que é ideal.</li>
-    <li><strong>Skew:</strong> 0 – indicando que os eixos x e y da imagem são ortogonais, como esperado.</li>
-    <li><strong>Ponto Principal:</strong> (c<sub>x</sub>, c<sub>y</sub>) = (331.33, 268.33) – próximo ao centro da imagem.</li>
-  </ul>
 
   <h4>Comparação com Parte A</h4>
   <p>
@@ -258,7 +256,6 @@
     pois em cada uma delas a câmera está posicionada em um local e orientação diferentes em relação ao tabuleiro. 
     Os vetores <strong>r</strong> e <strong>t</strong> descrevem a transformação necessária para levar os pontos do mundo real (tabuleiro) até o sistema de coordenadas da câmera.
   </p>
-
 
 
   <p>Na sequência deste laboratório, após a equipe ter realizado a calibração da webcam com a captura de suas próprias imagens de calibração, a próxima etapa foi repetir o mesmo procedimento mas dessa vez utilizando uma outra câmera disponibilizada pelo professor. Ou seja, com a nova câmera, a equipe realizou a captura de diferentes fotos com o código já apresentado anteriormente e obteve novos parâmetros como resultados, apresentados abaixo:
