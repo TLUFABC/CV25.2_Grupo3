@@ -5,49 +5,68 @@
   Ricardo Javurek Rihan - RA: 11201920897
   Tiago Luiz Silva de Araujo Pereira - RA: 11013316
 
-  Laboratório realizado dias 25 de Junho, relatório finalizado dia
+  Laboratório realizado dias 25 de Junho, relatório finalizado dia 02 de Julho.
   </pre></h3>
   <h2>Introdução</h2>
-  <p>
-    A calibração de câmeras é um processo fundamental em Visão Computacional, permitindo a correção de distorções da lente e a determinação dos 
-    parâmetros intrínsecos e extrínsecos da câmera. Esses parâmetros são essenciais para aplicações como reconstrução 3D, realidade aumentada, 
-    navegação de robôs e medições precisas em imagens. Neste segundo relatório, realizamos três etapas principais: Calibração com imagens pré-capturadas, 
-    Calibração de uma webcam pessoal e a Correção de distorção em imagens.
-  </p>
+  <h2>Introdução</h2>
+<p>
+  Este relatório tem como objetivo documentar os procedimentos e análises realizados durante o Laboratório 2 da disciplina de Visão Computacional, 
+  cujo tema central é a calibração de câmeras. A calibração de câmeras é um processo essencial para corrigir distorções causadas pelas lentes e para 
+  determinar os parâmetros intrínsecos (como a distância focal, ponto principal e fator de skew) e extrínsecos (posição e orientação da câmera em 
+  relação ao mundo 3D). Esses parâmetros são fundamentais para aplicações como reconstrução tridimensional, realidade aumentada, navegação de robôs 
+  e medições precisas em imagens.
+</p>
+<p>
+  O laboratório foi dividido em quatro partes principais: (A) Realizar um procedimento de calibração de câmera utilizando imagens de exemplo fornecidas, (B) Calibração de uma webcam 
+  com imagens capturadas pelos integrantes da equipe, (C) Calibração de uma segunda câmera, fornecida pelo professor, e (D) Correção de distorções 
+  em imagens utilizando os parâmetros obtidos na calibração. Além disso, foram explorados os conceitos teóricos que fundamentam a geometria da formação 
+  de imagens e a modelagem de distorções radiais e tangenciais.
+</p>
+<p>
+  Ao longo deste relatório, apresentamos os procedimentos adotados em cada etapa, os códigos utilizados com as devidas modificações, os parâmetros obtidos e uma análise e comparação sobre os resultados.
+</p>
+
   <h2>Arquivos base para reproduzir o procedimento:</h2>
   <ul>
     <li><a href="relatorio2/esza019_2025.2__Lab2_calib_v2.pdf" download class="download-link">📄 Baixar Roteiro (PDF)</a></li>
     <li><a href="relatorio2/Lab2_arquivos.zip" download class="download-link">📦 Baixar Códigos Fonte (ZIP)</a></li>
   </ul>
 
-    <h2>Procedimentos Experimentais</h2>
-      <!-- Parte 1 - A -->
+  <h2>Procedimentos Experimentais</h2>
+
+  <h3>Parte A – Calibração com imagens fornecidas</h3>
 
   <p>
-    O primeiro experimento consiste em realizar a calibração da camera utilizando imagens disponibilizadas de uma tabuleiro 6x9
-    sendo registradas de diversos angulos.
+    Nesta primeira etapa do experimento, realizamos um procedimento de calibração da câmeras utilizando um conjunto de imagens previamente disponibilizadas. 
+    As imagens retratam um padrão de tabuleiro de xadrez com dimensões <strong>6x9</strong> (número de cantos internos), registradas sob diferentes ângulos e posições. 
+    O objetivo desta etapa é estimar os parâmetros intrínsecos e extrínsecos da câmera utilizada na captura dessas imagens, bem como os coeficientes de distorção da lente, 
+    com base nas imagens fornecidas.
   </p>
+
   <div class="image-container">
-    <img src="relatorio2/foto1.jpg" alt="Imagem na leitura original" class="relatorio-image">
-    <p class="image-caption"><em>Imágem original disponibilizada</em></p>
+    <img src="relatorio2/foto1.jpg" alt="Imagem do tabuleiro disponibilizada" class="relatorio-image">
+    <p class="image-caption"><em>Exemplo de imagem do tabuleiro disponibilizada para a calibração</em></p>
   </div>
   <p>
-    Agora através do código disponibilizado, tanto pelo relatório quanto pelo site learnopencv.com, conseguimos realizar a detecção dos cantos da imagem 
-    sendo segurada pelo homem atravez de parametros definido em código, sendo nesse caso a distancia de 3 centimetro entre cada quadrado
+    Utilizamos o código <code>L2_cal.py</code>, fornecido pelo professor e baseado no tutorial do site 
+    <a href="https://learnopencv.com/camera-calibration-using-opencv/" target="_blank">LearnOpenCV</a>. Esse script realiza a leitura das imagens,
+    detecta automaticamente os cantos internos do padrão de calibração e aplica o algoritmo de calibração de câmera do OpenCV. Inicialmente, com o código original, era possível detectar apenas um grid 6X8, com distâncias definadas em 3cm, isso por que, dentro do código, foi 
+    definido que ele encontrasse um grid nessas especificações. Para que o padrão completo fosse detectado corretamente, foi necessário modificar o parâmetro <code>CHECKERBOARD</code> de <code>(6, 8)</code> para <code>(6, 9)</code>, 
+    conforme a geometria do tabuleiro.
   </p>
+
   <div class="image-container">
-    <img src="relatorio2/foto2.jpg" alt="Imagem" class="relatorio-image">
-    <p class="image-caption"><em>Imágem lida pelo código modificado</em></p>
+    <img src="relatorio2/foto2.jpg" alt="Detecção dos cantos do tabuleiro" class="relatorio-image">
+    <p class="image-caption"><em>Detecção dos cantos internos do padrão de calibração</em></p>
   </div>
-  Inicialmente, com o código original, ele conseguia detectar apenas um grid 6X8, com distancias definadas em 3cm, isso por que, dentro do código, foi 
-  definido que ele encontrasse um grid nessas especificações, porém modificamos ele para que conseguisse detectar o grid por completo (6X9). 
-  Segue o trecho do código modificado:</br>
-  <div class="button-group">
-    <button onclick="toggleSection('code1')">Código 1 Modificado</button>
-  </div>
-  <div id="code1" class="relatorio-section" style="display: none;">
-      <code><pre>
-      .....
+  
+  <p>Trecho do código modificado:</p>
+<div class="button-group">
+  <button onclick="toggleSection('code1')">Código 1 Modificado</button>
+</div>
+<div id="code1" class="relatorio-section" style="display: none;">
+  <code><pre>
+  .....
       import glob
  
       # Defining the dimensions of checkerboard
@@ -57,92 +76,193 @@
       # Creating vector to store vectors of 3D points for each checkerboard image
       objpoints = []
       .....
-    </pre></code>
-  </div>
+  </pre></code>
+</div>
   
   <h2>Parâmetros Obtidos</h2>
-  
+
   <div style="margin: 20px 0;">
-  <div style="font-weight: bold; font-size: 18px; margin-bottom: 10px;">Matriz Intrínseca K</div>
-    <p>Transforma coordenadas 3D do sistema de coordenadas da câmera em coordenadas 2D na imagem, captura as características ópticas 
-      internas da câmera e é constante para uma determinada câmera e configuração de lente</p>
+    <div style="font-weight: bold; font-size: 18px; margin-bottom: 10px;">Matriz Intrínseca K</div>
+    <p>
+      A matriz intrínseca representa os parâmetros ópticos internos da câmera. Ela inclui as distâncias focais nos eixos x e y (em pixels), 
+      a coordenada do ponto principal (centro óptico da imagem) e o fator de skew (geralmente zero em câmeras modernas). Essa matrix transforma coordenadas 3D do sistema de coordenadas da câmera em coordenadas 2D na imagem e é constante para uma determinada câmera e configuração de lente.
+    </p>
     <table style="border-collapse: collapse;">
       <tr>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">536.0734</td>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">342.3704</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">536.0734</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">342.3704</td>
       </tr>
       <tr>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">536.0164</td>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">235.5369</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">536.0164</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">235.5369</td>
       </tr>
       <tr>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">0</td>
-        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center; font-family: monospace;">1</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+        <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">1</td>
       </tr>
     </table>
   </div>
 
 
-  <h3>Matriz R e Vetor t (Extrínsecos):</h3>
-    <p>
-        Descrevem a posição e orientação da câmera no mundo 3D
+  <h3>Coeficientes de Distorção (vetor <code>dist</code>)</h3>
+  <p>
+    O vetor de distorção modela as imperfeições da lente, principalmente a <strong>distorção radial</strong> (as linhas retas se curvando) e a 
+    <strong>distorção tangencial</strong> (deslocamentos causados por desalinhamento da lente).
+  </p>
+  <p><strong>D =</strong> [−0.2651, −0.0467, 0.0018, −0.0003, 0.2523]</p>
 
-        R: como a câmera está rotacionada em relação ao padrão de calibração
+  <h3>Parâmetros Extrínsecos (R e t)</h3>
+  <p>
+    Para cada imagem utilizada na calibração, são obtidos um vetor de rotação (<code>rvec</code>) e um vetor de translação (<code>tvec</code>), que juntos definem a posição e 
+    orientação da câmera em relação ao plano do tabuleiro. 
 
-        t: onde a câmera está localizada em relação ao padrão de calibração
+        R: traz informações sobre como a câmera está rotacionada em relação ao padrão de calibração.
+
+        t: traz informações sobre onde a câmera está localizada em relação ao padrão de calibração.
 
         Variam para cada imagem, pois dependem da posição relativa entre câmera e tabuleiro
-    </p>
-    <p></p>
-  <h3>Vetor dist (Distorção):</h3>
-    <p>Modela as imperfeições da lente que fazem com que as linhas retas apareçam curvas na imagem</p>
-    <p>D=[−0.2651−0.04670.0018−0.00030.2523]</p></br>
-
-    <p>Estes parâmetros são essenciais para aplicações de visão computacional que requerem medidas precisas a partir de imagens, como 
-      reconstrução 3D, realidade aumentada ou navegação de robôs.
-    </p></br>
-
-  <p>Em seguida, utilizando uma webcam e um desenho de um grid, tiramos varias fotos do mesmo com o intuito de realizar a calibragem
-    da camera com essas imagens. E além disso, realizamos uma modificação no código, conforme solicitado, para que fosse utilizado o nome
-    de um dos integrantes ao tirar a foto. Segue uma das fotos tiradas para a calibragem e o trecho de código modificado:
   </p>
+  <p>
+    Abaixo, apresentamos os primeiros vetores de rotação e translação obtidos para as imagens utilizadas:
+  </p>
+
+  <div class="button-group">
+    <button onclick="toggleSection('extrinsecos')">Mostrar parâmetros extrínsecos (R e t)</button>
+  </div>
+  <div id="extrinsecos" class="relatorio-section" style="display: none;">
+    <code><pre>
+    rvecs (exemplo):
+    [-0.08398745], [0.34802803], [-1.54244125]
+    [-0.27527337], [0.10123358], [-1.56296566]
+
+    tvecs (exemplo):
+    [-2.96218135], [0.57159005], [16.83013788]
+    [-3.99387879], [2.27704403], [12.68878153]
+    </pre></code>
+  </div>
+
+  <p>
+    Esses parâmetros são fundamentais para realizar transformações entre o sistema de coordenadas do mundo real (onde está o tabuleiro) 
+    e o sistema de coordenadas da câmera. Com isso, é possível reconstruir posições 3D, realizar medições e corrigir distorções nas imagens.
+  </p>
+
   
+  <h3>Parte B – Calibração com webcam do laboratório</h3>
+
+  <p>
+    Na segunda etapa do experimento, realizamos a calibração de uma webcam utilizando imagens capturadas pelos integrantes da equipe. 
+    Utilizamos novamente um padrão de tabuleiro de xadrez com dimensões internas de <strong>6x9</strong> e o script <code>L2_chess.py</code> para capturar de 10 a 15 imagens 
+    sob diferentes ângulos e distâncias. Conforme solicitado, modificamos o nome do arquivo salvo para incluir o nome de um dos integrantes da equipe.
+  </p>
+
   <div class="button-group">
     <button onclick="toggleSection('code2')">Código 2 Modificado</button>
   </div>
   <div id="code2" class="relatorio-section" style="display: none;">
     <code><pre>
-      .....
-      while True:
-      # Capture frame-by-frame
+  i = 0
+  while True:
       ret, frame = cap.read()
-      # if frame is read correctly ret is True
       if not ret:
-      print("Can't receive frame (stream end?). Exiting ...")
-      break
-      
-      # Display the resulting frame
+          print("Can't receive frame (stream end?). Exiting ...")
+          break
+
       cv.imshow('frame', frame)
-      
-      # Save on "s" key or exit on "q"
-      k = cv.waitKey(1) 
-      if  k == ord('s'):
-      cv.imwrite("Ricardo"+str(i)+".jpg",frame)
-      i = i + 1
-      print("frame", i)
+      k = cv.waitKey(1)
+
+      if k == ord('s'):
+          cv.imwrite("Ricardo" + str(i) + ".jpg", frame)
+          i += 1
+          print("frame", i)
       elif k == ord('q'):
-      break
-      .....
+          break
     </pre></code>
   </div>
-  
+
   <div class="image-container">
-    <img src="relatorio2/Ricardo6.jpg" alt="Imagem" class="relatorio-image">
-    <p class="image-caption"><em>Ricardo6.jpg</em></p>
+    <img src="relatorio2/Ricardo6.jpg" alt="Imagem capturada pela equipe para calibração" class="relatorio-image">
+    <p class="image-caption"><em>Exemplo de imagem capturada pela equipe para calibração</em></p>
   </div>
+
+  <p>
+    Após a captura, utilizamos o script <code>L2_cal.py</code> com as imagens obtidas para realizar a calibração da webcam. O processo retornou os seguintes parâmetros:
+  </p>
+
+  <h4>Matriz Intrínseca K</h4>
+  <table style="border-collapse: collapse;">
+    <tr>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">691.4759</td>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">331.3271</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">688.6196</td>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">268.3314</td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">0</td>
+      <td style="border: 1px solid #333; padding: 8px 12px; text-align: center;">1</td>
+    </tr>
+  </table>
+
+  <h4>Coeficientes de Distorção (vetor <code>dist</code>)</h4>
+  <p><strong>D =</strong> [0.0428, −0.1733, 0.0015, 0.0007, 0.3550]</p>
+
+  <h4>Parâmetros Extrínsecos</h4>
+  <p>
+    Como na Parte A, a calibração gerou um conjunto de vetores de rotação (<code>rvecs</code>) e translação (<code>tvecs</code>) para cada imagem capturada. 
+    Esses parâmetros descrevem a posição e orientação da câmera em relação ao plano do tabuleiro em cada foto.
+  </p>
+
+  <div class="button-group">
+    <button onclick="toggleSection('extrinsecos_webcam')">Mostrar parâmetros extrínsecos (R e t) – Webcam</button>
+  </div>
+  <div id="extrinsecos_webcam" class="relatorio-section" style="display: none;">
+    <code><pre>
+  rvecs (exemplo):
+  [ 0.33699863], [0.66226067], [1.68536465]
+  [-0.67689141], [0.93845312], [1.36255251]
+
+  tvecs (exemplo):
+  [3.40036748], [-1.77216632], [15.51420698]
+  [0.77770731], [-2.94733489], [15.38510949]
+    </pre></code>
+  </div>
+
+  <h4>Análise dos Parâmetros</h4>
+  <ul>
+    <li><strong>Focal Length:</strong> f<sub>x</sub> = 691.48 px, f<sub>y</sub> = 688.62 px – indicando lentes com distâncias focais próximas nos dois eixos.</li>
+    <li><strong>Aspect Ratio:</strong> f<sub>x</sub> / f<sub>y</sub> = 1.004 – muito próximo de 1, o que é ideal.</li>
+    <li><strong>Skew:</strong> 0 – indicando que os eixos x e y da imagem são ortogonais, como esperado.</li>
+    <li><strong>Ponto Principal:</strong> (c<sub>x</sub>, c<sub>y</sub>) = (331.33, 268.33) – próximo ao centro da imagem.</li>
+  </ul>
+
+  <h4>Comparação com Parte A</h4>
+  <p>
+    Comparando com a calibração realizada na Parte A (imagens fornecidas), observamos que:
+  </p>
+  <ul>
+    <li>Os valores de focal length são maiores na webcam utilizada nesta etapa.</li>
+    <li>O ponto principal deslocou-se levemente, o que é comum devido à diferença de resolução entre câmeras.</li>
+    <li>Os coeficientes de distorção indicam uma lente com menor distorção radial em relação à câmera da Parte A.</li>
+  </ul>
+
+  <h4>Por que temos vários vetores R e t?</h4>
+  <p>
+    O algoritmo de calibração estima um par de parâmetros extrínsecos (rotação e translação) para <strong>cada imagem</strong> capturada, 
+    pois em cada uma delas a câmera está posicionada em um local e orientação diferentes em relação ao tabuleiro. 
+    Os vetores <strong>r</strong> e <strong>t</strong> descrevem a transformação necessária para levar os pontos do mundo real (tabuleiro) até o sistema de coordenadas da câmera.
+  </p>
+
+
+
+  <p>Na sequência deste laboratório, após a equipe ter realizado a calibração da webcam com a captura de suas próprias imagens de calibração, a próxima etapa foi repetir o mesmo procedimento mas dessa vez utilizando uma outra câmera disponibilizada pelo professor. Ou seja, com a nova câmera, a equipe realizou a captura de diferentes fotos com o código já apresentado anteriormente e obteve novos parâmetros como resultados, apresentados abaixo:
+  </p>
 
   <h2>Análise e Discussão</h2>
   <p>
