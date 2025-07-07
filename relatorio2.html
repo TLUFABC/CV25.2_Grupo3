@@ -284,7 +284,7 @@
 
   <h3>Parte D – Correção de distorção de imagens </h3>
   <p>Após a equipe ter realizado a calibração da câmera nova, foram tiradas 3 fotos, 1 de cada integrante, e em cima dessas fotos foram realizadas a correção de distorção utilizando duas funções diferentes, a <code>cv.undistort()</code> e a <code>cv.remap()</code>.
-  
+    A seguir podemos ver lado a lado, respectivamente, as fotos originais (à esquerda), as fotos tratadas com o undistort() (à direita) e as fotos tratadas com o remap() (em baixo):
   </p>
 
   <div class="image-container">
@@ -305,13 +305,19 @@
     <img src="relatorio2/TiagoRemap.png" alt="Imagem com Remap" class="relatorio-image">
   </div>
 
+  <p>Analisando as imagens podemos concluir que após a aplicação do cv.undistort(), as linhas previamente curvas passaram a ser representadas de forma mais reta e proporcional, contribuindo para uma reconstrução visual mais fiel da cena capturada.
+    E com a função cv.remap() reparamos que, à olho nu, as modificações são muito parecidas com as realizadas com o undistort, porém uma pequena faixa na parte de baixo da imagem parece ter sido cortada.
+  </p>
+
   <h2>Análise e Discussão</h2>
   <p>
-      
+    O relatório apresentou de forma clara e estruturada os passos realizados no Laboratório 2 de Visão Computacional, com foco na calibração de câmeras. A equipe aplicou o processo de calibração utilizando diferentes conjuntos de imagens e câmeras, ajustando os parâmetros do código conforme necessário para garantir a correta detecção dos padrões de calibração.
+    A comparação entre os resultados obtidos com diferentes dispositivos destacou variações naturais nos parâmetros intrínsecos e nos coeficientes de distorção. A explicação sobre os múltiplos vetores de rotação e translação mostra uma boa compreensão sobre como as diferentes poses da câmera afetam o cálculo dos parâmetros extrínsecos.
+    Na etapa de correção de distorção, o uso das funções cv.undistort() e cv.remap() permitiu observar os efeitos visuais da retificação nas imagens. A análise final apontou que ambas as funções foram eficazes na correção da distorção radial, mas com leves diferenças perceptíveis na forma como as imagens foram transformadas. 
   </p>
   <h2>Conclusões</h2>
   <p>
-    
+    O experimento demonstrou a importância da calibração de câmeras na obtenção de imagens mais precisas e livres de distorções, fundamentais para aplicações avançadas em visão computacional. As etapas realizadas permitiram não apenas aplicar os conceitos teóricos abordados em aula, mas também explorar a prática de ajustes e análises comparativas entre diferentes dispositivos. A utilização das funções cv.undistort() e cv.remap() evidenciou como os parâmetros obtidos durante a calibração são essenciais para corrigir imperfeições visuais, contribuindo para representações mais realistas e confiáveis das cenas capturadas.
   </p>
     <div class="referencias">
     <h2>Referências</h2>
