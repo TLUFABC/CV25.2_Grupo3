@@ -43,14 +43,23 @@
 
   <h3>Parte 2A. Feature Matching com Homografia</h3>
   <p>
-    Nessa primeira etapa prática, desenvolvemos um script baseado no tutorial da OpenCV disponibilizado em: <a href="https://docs.opencv.org/4.x/d1/de0/tutorial_py_feature_homography.html>" target="_blank">Feature Homography</a> que realiza detecção de características com SIFT em duas imagens distintas de um mesmo objeto. Utilizamos correspondência de features e estimativa de homografia para localizar o objeto. O resultado final é uma imagem com as correspondências visuais traçadas.
+    Nessa primeira etapa prática, desenvolvemos um script baseado no tutorial da OpenCV disponibilizado em: 
+    <a href="https://docs.opencv.org/4.x/d1/de0/tutorial_py_feature_homography.html" target="_blank">Feature Matching + Homography</a>. 
+    O código realiza a detecção de características com SIFT em duas imagens distintas de um mesmo objeto, localizadas em posições e cenas diferentes. Utilizamos correspondência de features e estimativa de homografia para identificar a localização do objeto na cena. O resultado final é uma imagem com as correspondências visuais traçadas.
   </p>
 
   <div class="image-row">
     <div class="image-col">
-      <img src="relatorio5/match1.jpg" alt="Imagem de referência" class="relatorio-image">
-      <img src="relatorio5/match2.jpg" alt="Imagem alvo" class="relatorio-image">
-      <p class="image-caption"><em>Exemplo de correspondência de features com SIFT</em></p>
+      <img src="relatorio5/box.png" alt="Imagem do objeto isolado (box.png)" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 1: Objeto isolado (box.png)</em></p>
+    </div>
+    <div class="image-col">
+      <img src="relatorio5/box_in_scene.png" alt="Objeto em cena (box_in_scene.png)" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 2: Objeto em outra cena (box_in_scene.png)</em></p>
+    </div>
+    <div class="image-col">
+      <img src="relatorio5/featureMatching.png" alt="Imagem com correspondências traçadas" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 3: Correspondência de features detectadas (featureMatching.png)</em></p>
     </div>
   </div>
 
@@ -117,12 +126,18 @@
 
   <h3>Parte 2B. Matching ao vivo com webcams</h3>
   <p>
-    Nessa parte B, adaptamos o código anterior para realizar a detecção de características ao vivo com as duas câmeras da configuração estéreo. Os resultados foram mostrados em tempo real com destaque nas correspondências detectadas entre as imagens capturadas pelas webcams.
+    Nessa parte B, adaptamos o código anterior para realizar a detecção de características ao vivo com as duas câmeras da configuração estéreo. O sistema capturava continuamente os quadros de ambas as webcams e realizava a correspondência de features em tempo real, destacando visualmente os pontos correspondentes.
+  </p>
+  <p>
+    Abaixo apresentamos uma imagem de exemplo obtida durante a execução do sistema, demonstrando o funcionamento da correspondência de características entre os dois vídeos:
   </p>
 
-  <video controls width="640">
-    <source src="videos/matching_webcam.mp4" type="video/mp4">
-  </video>
+  <div class="image-row">
+    <div class="image-col">
+      <img src="relatorio5/featureMatchingVideo.png" alt="Correspondência em vídeo ao vivo com câmeras estéreo" class="relatorio-image">
+      <p class="image-caption"><em>Exemplo de correspondência de features entre as duas câmeras (vídeo ao vivo)</em></p>
+    </div>
+  </div>
 
   <div class="button-group">
     <button onclick="toggleSection('code-parte2b')">Ver Código - Parte 2B</button>
@@ -213,10 +228,32 @@
 
   <h3>Parte 3C. Transformada de Hough em imagens</h3>
   <p>
-    Nessa próxima etapa do laboratório, implementamos um script baseado no tutorial disponibilizado em: <a href="<https://learnopencv.com/hough-transform-with-opencv-c-python/" target="_blank">Hough Tranform</a> que aplica a Transformada de Hough para detectar linhas e círculos em imagens previamente capturadas. Essa técnica foi essencial para identificação de formas geométricas em cenas controladas.
+    Nessa próxima etapa do laboratório, implementamos um script baseado no tutorial disponibilizado em: 
+    <a href="https://learnopencv.com/hough-transform-with-opencv-c-python/" target="_blank">Hough Transform</a>, 
+    que aplica a Transformada de Hough para detectar linhas e círculos em imagens previamente capturadas. Essa técnica foi essencial para identificação de formas geométricas em cenas controladas.
   </p>
 
-  <img src="relatorio5/hough_static.jpg" alt="Resultado da Hough estática" class="relatorio-image">
+  <div class="image-row">
+    <div class="image-col">
+      <img src="relatorio5/circle.png" alt="Imagem original para detecção de círculos" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 1: Original (para detecção de círculos)</em></p>
+    </div>
+    <div class="image-col">
+      <img src="relatorio5/HoughCircle.png" alt="Resultado da Transformada de Hough para círculos" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 2: Círculos detectados (HoughCircle.png)</em></p>
+    </div>
+  </div>
+
+  <div class="image-row">
+    <div class="image-col">
+      <img src="relatorio5/images.png" alt="Imagem original para detecção de linhas" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 3: Original (para detecção de linhas)</em></p>
+    </div>
+    <div class="image-col">
+      <img src="relatorio5/HoughLines.png" alt="Resultado da Transformada de Hough para linhas" class="relatorio-image">
+      <p class="image-caption"><em>Imagem 4: Linhas detectadas (HoughLines.png)</em></p>
+    </div>
+  </div>
 
   <div class="button-group">
     <button onclick="toggleSection('code-parte3c')">Ver Código - Parte 3C</button>
@@ -264,12 +301,18 @@
 
   <h3>Parte 3D. Hough ao vivo com webcams</h3>
   <p>
-    Na sequência, o código anterior foi adaptado para entrada de vídeo ao vivo com as duas webcams da câmera estéreo. Linhas e círculos detectados eram sobrepostos nas imagens em tempo real.
+    Na sequência, o código anterior foi adaptado para entrada de vídeo ao vivo com as duas webcams da câmera estéreo. O sistema aplicava em tempo real a Transformada de Hough para identificar formas geométricas, como linhas e círculos, sobrepondo essas detecções nos quadros capturados.
+  </p>
+  <p>
+    A imagem abaixo foi obtida durante a execução do sistema, mostrando a identificação simultânea de círculos e linhas nas imagens capturadas pelas câmeras:
   </p>
 
-  <video controls width="640">
-    <source src="videos/hough_webcam.mp4" type="video/mp4">
-  </video>
+  <div class="image-row">
+    <div class="image-col">
+      <img src="relatorio5/HoughCameras.png" alt="Detecção de linhas e círculos em vídeo ao vivo" class="relatorio-image">
+      <p class="image-caption"><em>Exemplo de detecção de linhas e círculos ao vivo com câmeras estéreo (HoughCameras.png)</em></p>
+    </div>
+  </div>
 
   <div class="button-group">
     <button onclick="toggleSection('code-parte3d')">Ver Código - Parte 3D</button>
