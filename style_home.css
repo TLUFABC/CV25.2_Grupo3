@@ -141,6 +141,13 @@ body {
   border-radius: 8px;
 }
 
+.relatorio-image-small {
+    width: 300px;
+    height: auto;
+    margin: 10px;
+    border: 1px solid #ccc;
+  }
+
 .image-caption {
   margin-top: 8px;
   font-style: italic;
